@@ -5,7 +5,12 @@ include(CTest)
 
 enable_testing()
 find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
 if(NOT OpenGL_FOUND)
+    message(FATAL_ERROR "OpenGL not found")
+endif()
+
+if(NOT GLUT_FOUND)
     message(FATAL_ERROR "OpenGL not found")
 endif()
 
@@ -17,8 +22,8 @@ set(HEADERS
 )
 
 add_executable(Minecraft ${SOURCES} ${HEADERS})
-target_include_directories(Minecraft PRIVATE include ${OPENGL_INCLUDE_DIRS})
-target_link_libraries(Minecraft PRIVATE ${OPENGL_LIBRARIES})
+target_include_directories(Minecraft PRIVATE include ${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS})
+target_link_libraries(Minecraft PRIVATE ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

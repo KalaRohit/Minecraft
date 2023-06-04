@@ -6,4 +6,6 @@ cd build
 cmake ..
 cmake --build .
 
+clear
+
 ./Minecraft

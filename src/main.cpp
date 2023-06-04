@@ -1,16 +1,27 @@
-#include <iostream>
+#include <stdio.h>
+#include <GL/glut.h>
 
-#ifdef _WIN32
-    #include <windows.h>
-#endif
+void display(void) {
+    glClearColor(1.0, 1.0, 1.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(0.0, 0.0, 0.0);
+    glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+    glBegin(GL_POLYGON);
+    glVertex2f(-0.5, -0.5);
+    glVertex2f(-0.5, 0.5);
+    glVertex2f(0.5, 0.5);
+    glVertex2f(0.5, -0.5);
+    glEnd();
+    glFlush();
+}
 
-#include <GL/gl.h>
-
-
-
-int main(int, char**) {
-    const GLubyte* version = glGetString(GL_VERSION);
-    std::cout << "OpenGL version: " << version << std::endl;
-
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE);
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("OpenGL Test");
+    glutDisplayFunc(display);
+    glutMainLoop();
     return 0;
 }
